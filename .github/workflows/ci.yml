@@ -23,18 +23,14 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     steps:
-    - run: echo 'This is a pull request'
-      if: ${{ github.event_name == 'pull_request' }}
-    - run: echo 'This is a push'
-      if: ${{ github.event_name == 'push' }}
+    - uses: actions/setup-java@v1.3.0
+      with:
+        java-version: 1.11
     - if: ${{ github.event_name == 'push' }}
       uses: MichaelSp/eslint-action@master
       with:
         repo-token: "${{secrets.GITHUB_TOKEN}}"
         source-root: "client"
-    - uses: actions/setup-java@v1.3.0
-      with:
-        java-version: 1.11
     - uses: actions/checkout@v2
     - run: |
         git fetch --unshallow
