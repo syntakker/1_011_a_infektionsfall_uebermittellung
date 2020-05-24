@@ -27,10 +27,15 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
     - run: echo 'This is a push'
       if: ${{ github.event_name == 'push' }}
-#    - uses: actions/setup-java@v1.3.0
-#      with:
-#        java-version: 1.11
-#    - uses: actions/checkout@v2
-#    - run: |
-#        git fetch --unshallow
-#        gradle build lint test
+    - if: ${{ github.event_name == 'push' }}
+      uses: MichaelSp/eslint-action@master
+      with:
+        repo-token: "${{secrets.GITHUB_TOKEN}}"
+        source-root: "client"
+    - uses: actions/setup-java@v1.3.0
+      with:
+        java-version: 1.11
+    - uses: actions/checkout@v2
+    - run: |
+        git fetch --unshallow
+        gradle build lint test
