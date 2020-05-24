@@ -23,15 +23,15 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-java@v1.3.0
-      with:
-        java-version: 1.11
+    - uses: actions/checkout@v2
     - if: ${{ github.event_name == 'push' }}
-      uses: MichaelSp/eslint-action@master
+      uses: hallee/eslint-action@1.0.3
       with:
         repo-token: "${{secrets.GITHUB_TOKEN}}"
         source-root: "client"
-    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v1.3.0
+      with:
+        java-version: 1.11
     - run: |
         git fetch --unshallow
         gradle build lint test
