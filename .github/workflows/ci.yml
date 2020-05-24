@@ -22,6 +22,7 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     steps:
+    - run: echo ${{github.event.name}}
     - uses: actions/setup-java@v1.3.0
       with:
         java-version: 1.11
