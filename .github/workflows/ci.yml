@@ -22,7 +22,7 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ request.headers["X-GitHub-Event"] }}
+    - run: echo ${{ github.event.requested_action }}
 #    - uses: actions/setup-java@v1.3.0
 #      with:
 #        java-version: 1.11
